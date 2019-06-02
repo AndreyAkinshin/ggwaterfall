@@ -1,0 +1,75 @@
+---
+title: "Palettes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{palettes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5
+)
+```
+
+```{r setup, include = FALSE}
+library(ggwaterfall)
+```
+
+With the help of the `palette` argument (the second argument of
+`waterfall_density` and `waterfall_ft`) allows you to customize the fill colors
+of your plot.
+
+Below you can find several nice looking color palettes.
+
+## Rainbow
+
+```{r rainbow}
+waterfall_density(rdistrs(20), rainbow(7))
+```
+
+## Heatmap
+
+```{r heatmap}
+waterfall_density(rdistrs(20), colorRampPalette(c("red", "orange"))(8))
+```
+
+## Yellow
+
+```{r yellow}
+waterfall_density(rdistrs(20), colorRampPalette(c("yellow", "yellow4"))(9))
+```
+
+## Blue
+
+```{r blue}
+waterfall_density(rdistrs(20), colorRampPalette(c("royalblue", "royalblue4"))(10))
+```
+
+## Purple
+
+```{r purple}
+waterfall_density(rdistrs(20), colorRampPalette(c("purple", "purple4"))(11))
+```
+
+## Green
+
+```{r green}
+waterfall_density(rdistrs(20), colorRampPalette(c("green2", "green4"))(12))
+```
+
+## Pulsar style
+
+With the help of `style.pulsar`, you can apply the plot style which is similar
+to the iconic plot of a pulsar and the
+["Unknown Pleasures"](https://en.wikipedia.org/wiki/Unknown_Pleasures) Joy
+Division album cover. If it's true, the values of `palette`, `bg`, `col`,
+`alpha`, `show.axis`, `show.underline` will be ignored because they will be
+overriden by special values which are specific for the pulsar style images.
+
+```{r pulsar}
+waterfall_density(rdistrs(20), style.pulsar = TRUE)
+```

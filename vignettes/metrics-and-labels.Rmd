@@ -1,0 +1,98 @@
+---
+title: "Metrics and Labels"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{metrics-and-labels}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5
+)
+```
+
+```{r setup, include = FALSE}
+library(ggwaterfall)
+```
+
+Metrics and labels are powerful arguments which can add more useful data on a
+waterfall plot.
+Below you can find a few examples.
+
+## Show labels
+
+If `show.label` is `TRUE`, you will see labels on the right side of your plots.
+By default, the label for each plot is its indexes in the original list:
+
+```{r indxes}
+data <- list(
+  rnorm(100, 0),
+  rnorm(100, 40),
+  rnorm(100, 20)
+)
+waterfall_density(data, show.labels = TRUE)
+```
+
+If you are using named elements in your list, the names will be displayed
+instead of indexes:
+
+```{r names}
+data <- list(
+  a = rnorm(100, 0),
+  b = rnorm(100, 40),
+  c = rnorm(100, 20)
+)
+waterfall_density(data, show.labels = TRUE)
+```
+
+## Show metrics
+
+If `metric` is defined, it will be displayed instead of indexes:
+
+```{r metrics}
+data <- list(
+  rnorm(100, 0),
+  rnorm(100, 40),
+  rnorm(100, 20)
+)
+waterfall_density(data, metric = "mean", show.labels = TRUE)
+```
+
+## Sort by metric
+
+With the help of `sort.order` argument, you can sort all of your plots by the
+metric value:
+
+```{r sort}
+waterfall_density(rdistrs(20), metric = "mean", sort.value = "metric",
+                  show.labels = TRUE)
+```
+
+## Custom label function
+
+You can provide own function which can be used for label generation:
+
+```{r custom-label}
+custom_label <- function(index, name, metric.value) {
+  paste0(index, ":", round(metric.value))
+}
+waterfall_density(rdistrs(5), metric = mean, calc.label = custom_label,
+                  show.labels = TRUE)
+```
+
+## Custom label width
+
+If you have long labels, the space for labels can be increased via
+`label.expand`:
+
+```{r custom-width}
+custom_label <- function(index, name, metric.value) {
+  paste(replicate(index, letters[index]), collapse = "")
+}
+waterfall_density(rdistrs(7), metric = mean, calc.label = custom_label,
+                  show.labels = TRUE, label.expand = 0.2)
+```

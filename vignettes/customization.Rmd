@@ -1,0 +1,76 @@
+---
+title: "Customization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{customization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5
+)
+```
+
+```{r setup, include = FALSE}
+library(ggwaterfall)
+```
+
+Here you can find usage examples of a few useful arguments which can customize
+how waterfall plots look like
+
+## Title
+
+```{r title}
+waterfall_density(rdistrs(5), title = "Waterfall Density Plot")
+```
+
+## Colors
+
+```{r colors}
+waterfall_density(rdistrs(7), palette = rainbow(7), bg = "gray", col = "blue")
+```
+
+## Overlap
+
+```{r overlap00}
+waterfall_density(rdistrs(5), overlap = 0)
+```
+
+```{r overlap02}
+waterfall_density(rdistrs(5), overlap = 0.2)
+```
+
+```{r overlap08}
+waterfall_density(rdistrs(5), overlap = 0.8)
+```
+
+## Show underline and axis
+
+```{r underline}
+waterfall_density(rdistrs(5), show.underline = FALSE)
+```
+
+```{r axis}
+waterfall_density(rdistrs(5), show.axis = FALSE)
+```
+
+```{r underline-axis}
+waterfall_density(rdistrs(5), show.axis = FALSE, show.underline = FALSE)
+```
+
+## Outliers
+
+```{r outliers}
+data <- list(
+  c(rbeta(200, 1, 10) * 100, 70, 80),
+  c(rbeta(200, 1, 10) * 100, 75, 77),
+  c(rbeta(200, 1, 10) * 100, 60, 74),
+  c(rbeta(200, 1, 10) * 100, 52, 79)
+)
+waterfall_density(data)
+waterfall_density(data, hide.outliers=T)
+```
